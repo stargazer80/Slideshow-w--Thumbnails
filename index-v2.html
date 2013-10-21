@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Slideshow_01</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="author" content="The Chopping Block, Inc." />
+	<meta name="geo.country" content="US" />
+	<meta name="dc.language" content="en" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	
+	<link rel="stylesheet" href="styles.css" type="text/css" media="screen" charset="utf-8" />
+	
+	<style type="text/css" media="screen">		
+
+		.thumbnail{
+			width: 100px;
+			height: 100px;
+		}
+		
+		.thumbnails{
+			border:#063 dotted 1px;
+			width:300px;
+			
+		}
+		
+	</style>
+    
+</head>
+<body>
+
+	<div class="wrap" >
+		Project: Slideshow_01
+		
+		The simplest slideshow just replaces the src attribute of an img, via JS
+		<br>
+		<div id="slideshow"><img id="image" src="http://placehold.it/300/300/FF9999&text=Hello+World+1"></div>
+        
+        <div class="thumbnails"></div>
+		
+		<br>
+		<button id="previous">Previous</button>
+		<button id="next">Next</button>
+
+	</div>
+	<script type="text/javascript" charset="utf-8">
+
+		// Simplest Replacement of image src attribute
+		var img = document.querySelector("img");
+		// img.src = "http://placehold.it/200x200/003";
+		
+		// Remember: Length of array is 4
+		// Last index is 3, because we start counting at 0
+		// 
+		// var images = [   "http://placehold.it/200x200/303"
+		// 				,"http://placehold.it/200x200/AA0000"
+		// 				,"http://placehold.it/200x200/00BB00"
+		// 				,"http://placehold.it/200x200/0000FF"];
+		
+		
+		var images = [   "http://placehold.it/300/300/FF9999&text=Hello+World+1"
+						,"http://placehold.it/300/300/FF3333&text=Hello+World+2"
+						,"http://placehold.it/300/300/990000&text=Hello+World+3"];		
+		
+		
+		
+		for (var i=0; i < images.length; i++) {
+		
+			var image = document.createElement("img");
+			image.src = images[i];
+			image.classList.add("thumbnail");
+			
+			document.querySelector(".thumbnails").appendChild(image);
+			
+			image.addEventListener("click", function(e){
+				
+				var lrg_image = document.querySelector("#image");
+				lrg_image.src = e.target.src;
+				
+			});
+			
+		};
+		
+	
+		
+	
+		
+		var index = 0;	
+		
+		var nextButton = document.querySelector("#next");
+		
+		var previousButton = document.querySelector("#previous");
+		
+		
+		//NEXT BUTTON
+		var showNextSlide = function(){
+		
+			if( index+1 < images.length){
+				
+				index = index+1;
+				
+			}else{
+				
+				index = 0;
+			}
+			
+			img.src = images[index];
+			
+		};
+		
+		nextButton.addEventListener("click", showNextSlide);
+
+		
+        //PREVIOUS BUTTON
+		var showPreviousSlide = function(){
+			
+			if( index-1 >= 0){
+			
+				index = index-1;
+				
+			}else{
+				
+				index = images.length-1;
+			}
+			
+			img.src = images[index];
+			
+		}
+		
+		previousButton.addEventListener("click", showPreviousSlide);
+		
+	
+		
+	
+	
+
+		
+		
+		
+	</script>
+</body>
+</html>
